@@ -8,8 +8,10 @@ public class NRU extends Thread{
 	int [][]matriz;
 	int []fallos;
 	int []distancia;
+	boolean thread;
 
-	public NRU(int nPag, int nFrame, int[] nPage, String[] nBit){
+	public NRU(int nPag, int nFrame, int[] nPage, String[] nBit, boolean x){
+		this.thread = x;
 		this.cantidadFrames = nFrame;
 		this.cantidadPaginas = nPag;
 		this.paginas = nPage;
@@ -133,8 +135,8 @@ public class NRU extends Thread{
 		System.out.println("\n\nFallos encontrados: "+cantidadFallos);
 	}
 
-	public void run(boolean t) {
-		if(t) {
+	public void run() {
+		if(thread) {
 			
 		}else {
 			
