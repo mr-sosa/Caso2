@@ -1,6 +1,6 @@
 
 
-public class LRU {
+public class NRU extends Thread{
 	
 	private int cantidadPaginas;
 	private int cantidadFrames;
@@ -9,8 +9,11 @@ public class LRU {
 	int []fallos;
 	int []distancia;
 
-	public LRU(){
-		System.out.println("LRU");
+	public NRU(int nPag, int nFrame, int[] nPage, String[] nBit){
+		this.cantidadFrames = nFrame;
+		this.cantidadPaginas = nPag;
+		this.paginas = nPage;
+		System.out.println("NRU");
 	}
 
 	public void setPaginas(int []paginas) {
@@ -94,7 +97,7 @@ public class LRU {
 		
 	}
 	
-	public void lru(){
+	public void nru(){
 		matriz=new int [cantidadFrames][cantidadPaginas];
 		fallos= new int [cantidadPaginas];
 		distancia= new int[cantidadFrames];
@@ -130,4 +133,11 @@ public class LRU {
 		System.out.println("\n\nFallos encontrados: "+cantidadFallos);
 	}
 
+	public void run(boolean t) {
+		if(t) {
+			
+		}else {
+			
+		}
+	}
 }

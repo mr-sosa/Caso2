@@ -10,7 +10,7 @@ public class Main {
 	
 	private int numRef;
 	
-	private Integer[] TP;
+	private Integer[][] TP;
 		
 	private Integer[] ram;
 	
@@ -32,7 +32,7 @@ public class Main {
 			int numRef = Integer.parseInt(br.readLine());
 			System.out.println("El número de referencias es: " + numRef);
 			
-			Integer [] refId = new Integer[numRef];
+			int [] refId = new int[numRef];
 			String [] refBit = new String[numRef];
 			
 			for(int i=0; i<numRef; i++) {
@@ -41,7 +41,10 @@ public class Main {
 				refBit[i] = s[1];
 			}
 			
-			
+			NRU nru1 = new NRU(numPaginas, numRef, refId, refBit);
+			nru1.start(true);
+			NRU nru2 = new NRU(numPaginas, numRef, refId, refBit);
+			nru2.start(false);
 			
 		} catch(Exception e) {
 			
