@@ -1,4 +1,6 @@
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 
 public class Main {
 	
@@ -18,6 +20,31 @@ public class Main {
 	}
 	
 	public static void main(String [] args) {
-		
+		try {
+			File archivo = new File("data/referencias8_16_75.txt");
+			FileReader fr = new FileReader (archivo);
+			BufferedReader br = new BufferedReader(fr);
+			
+			int numMarcos = Integer.parseInt(br.readLine());
+			System.out.println("El número de marcos de página es: " + numMarcos);
+			int numPaginas = Integer.parseInt(br.readLine());
+			System.out.println("El número de páginas es: " + numPaginas);
+			int numRef = Integer.parseInt(br.readLine());
+			System.out.println("El número de referencias es: " + numRef);
+			
+			Integer [] refId = new Integer[numRef];
+			String [] refBit = new String[numRef];
+			
+			for(int i=0; i<numRef; i++) {
+				String s[] = br.readLine().split(",");
+				refId[i] = Integer.parseInt(s[0]);
+				refBit[i] = s[1];
+			}
+			
+			
+			
+		} catch(Exception e) {
+			
+		}
 	}
 }
