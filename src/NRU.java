@@ -113,7 +113,22 @@ public class NRU extends Thread{
 		fallos[paginaActual]=1;
 		
 	}
-	
+
+	private synchronized void modificarBit(int paginaActual){
+		int i;
+		for(i=0;i<cantidadFrames;i++){
+			if(TP[paginaActual][0] == paginas[paginaActual]){
+				String s = bits[paginaActual];
+				if(s.equals("r")) {
+					TP[paginaActual][1] = 2;
+				}else {
+					TP[paginaActual][1] = 3;
+				}
+				break;
+			}
+		}
+		
+	}
 	public void nru(){
 		matriz=new int [cantidadFrames][cantidadPaginas];
 		fallos= new int [cantidadPaginas];
@@ -124,6 +139,8 @@ public class NRU extends Thread{
 		for(int j=0;j<cantidadPaginas;j++){
 			if(!buscar(j)){
 				modificar(j);
+			} else {
+				modificarBit(j);
 			}
 		}
 		mostrarMatriz();
