@@ -12,8 +12,8 @@ public class NRU extends Thread{
 
 	public NRU(int nPag, int nFrame, int[] nPage, String[] nBit, boolean x){
 		this.thread = x;
-		this.cantidadFrames = nFrame;
-		this.cantidadPaginas = nPag;
+		this.cantidadFrames = nPag;
+		this.cantidadPaginas = nFrame;
 		this.paginas = nPage;
 		System.out.println("NRU");
 	}
@@ -137,6 +137,10 @@ public class NRU extends Thread{
 
 	public void run() {
 		if(thread) {
+			nru();
+			for(int i=0; i<cantidadFrames; i++) {
+				
+			}
 			
 		}else {
 			

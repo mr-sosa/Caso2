@@ -41,7 +41,7 @@ public class Main {
 				refBit[i] = s[1];
 			}
 			
-			NRU nru1 = new NRU(numPaginas, numRef, refId, refBit, true);
+			NRU nru1 = new NRU(numMarcos, numRef, refId, refBit, true);
 			nru1.start();
 			NRU nru2 = new NRU(numPaginas, numRef, refId, refBit, false);
 			nru2.start();
