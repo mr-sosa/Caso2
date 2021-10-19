@@ -7,7 +7,7 @@ public class NRU extends Thread{
 	private int []paginas;
 	private int [][]matriz;
 	private int []fallos;
-	private int []distancia;
+	private int []casoFrames;
 	private boolean thread;
 	private String []bits;
 	private static int [][] TP;
@@ -74,24 +74,20 @@ public class NRU extends Thread{
 			matriz[frame][j]=paginas[paginaActual];
 		}
 	}
-	//este método me devolverá el frame que fue el mas antiguo en ser liberado
-	private int MayorDistancia(int paginaActual){
-		int mayorDist=0;
-		for(int i=0;i<cantidadFrames;i++){
-			for(int j=paginaActual;j>=0;j--){
-				if(matriz[i][paginaActual]==paginas[j]){
-					distancia[i]=paginaActual-j;
-					break;
-				}
-			}
-		}
+	//este método me devolverá el frame que fue el mas antiguo en ser usado
+	private int menosUsado(int paginaActual){
+		int frame=0;
 		
 		for(int i=0;i<cantidadFrames;i++){
-			if(distancia[i]>distancia[mayorDist]){
-				mayorDist=i;
+			casoFrames[i]=TP[i][1];
+		}
+		
+		for (int i=0;i < cantidadFrames; i++) {
+			if(casoFrames[i]<casoFrames[frame]){
+				frame=i;
 			}
 		}
-		return mayorDist;
+		return frame;
 	}
 	
 	private void modificar(int paginaActual){
@@ -105,7 +101,7 @@ public class NRU extends Thread{
 		}
 		
 		if(!encontradoFrameLibre){
-			llenarFila(paginaActual, MayorDistancia(paginaActual));
+			llenarFila(paginaActual, menosUsado(paginaActual));
 		}else{
 			llenarFila(paginaActual, (i));
 		}
@@ -132,7 +128,7 @@ public class NRU extends Thread{
 	public synchronized void nru(){
 		matriz=new int [cantidadFrames][cantidadPaginas];
 		fallos= new int [cantidadPaginas];
-		distancia= new int[cantidadFrames];
+		casoFrames= new int[cantidadFrames];
 		iniciarxfallos();
 		iniciarMatriz();
 		//Recorremos todas las paginas
