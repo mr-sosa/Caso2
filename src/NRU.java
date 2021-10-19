@@ -61,6 +61,15 @@ public class NRU extends Thread{
 	}
 	
 	private void llenarFila(int paginaActual, int frame){
+		
+		TP[frame][0]=paginaActual;
+		if(bits[paginaActual].equals("r")) {
+			TP[frame][1]=2;
+		}
+		else if(bits[paginaActual].equals("m")) {
+			TP[frame][1]=3;
+		}
+		
 		for(int j=paginaActual;j<cantidadPaginas;j++){
 			matriz[frame][j]=paginas[paginaActual];
 		}
