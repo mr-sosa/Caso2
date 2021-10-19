@@ -114,7 +114,7 @@ public class NRU extends Thread{
 		
 	}
 
-	private synchronized void modificarBit(int paginaActual){
+	private void modificarBit(int paginaActual){
 		int i;
 		for(i=0;i<cantidadFrames;i++){
 			if(TP[paginaActual][0] == paginas[paginaActual]){
@@ -129,19 +129,25 @@ public class NRU extends Thread{
 		}
 		
 	}
-	public void nru(){
+	public synchronized void nru(){
 		matriz=new int [cantidadFrames][cantidadPaginas];
 		fallos= new int [cantidadPaginas];
 		distancia= new int[cantidadFrames];
 		iniciarxfallos();
 		iniciarMatriz();
 		//Recorremos todas las paginas
-		for(int j=0;j<cantidadPaginas;j++){
-			if(!buscar(j)){
-				modificar(j);
-			} else {
-				modificarBit(j);
+		try {
+			for(int j=0;j<cantidadPaginas;j++){
+				if(!buscar(j)){
+					modificar(j);
+				} else {
+					modificarBit(j);
+				}
+				Thread.sleep(1);
+				notifyAll();
 			}
+		}catch(Exception e) {
+			
 		}
 		mostrarMatriz();
 	}
@@ -167,18 +173,6 @@ public class NRU extends Thread{
 		System.out.println("\n\nFallos encontrados: "+cantidadFallos);
 	}
 
-	private void semaforoWait() {
-		try {
-			wait();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	private void semaforoNotify() {
-		notifyAll();
-	}
 	
 	public synchronized void actualizarBitsRM() {
 		try {
