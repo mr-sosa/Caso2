@@ -43,7 +43,7 @@ public class Main {
 			
 			NRU nru1 = new NRU(numMarcos, numRef, refId, refBit, true);
 			nru1.start();
-			NRU nru2 = new NRU(numPaginas, numRef, refId, refBit, false);
+			NRU nru2 = new NRU(numMarcos, numRef, refId, refBit, false);
 			nru2.start();
 			
 		} catch(Exception e) {

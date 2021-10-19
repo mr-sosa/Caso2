@@ -4,16 +4,20 @@ public class NRU extends Thread{
 	
 	private int cantidadPaginas;
 	private int cantidadFrames;
-	int []paginas;
-	int [][]matriz;
-	int []fallos;
-	int []distancia;
-	boolean thread;
+	private int []paginas;
+	private int [][]matriz;
+	private int []fallos;
+	private int []distancia;
+	private boolean thread;
+	private String []bits;
+	private static int [][] TP;
+	
 
 	public NRU(int nPag, int nFrame, int[] nPage, String[] nBit, boolean x){
 		this.thread = x;
 		this.cantidadFrames = nPag;
 		this.cantidadPaginas = nFrame;
+		this.bits = nBit;
 		this.paginas = nPage;
 		System.out.println("NRU");
 	}
@@ -41,6 +45,8 @@ public class NRU extends Thread{
 			for(int j=0;j<cantidadPaginas;j++){
 				matriz[i][j]=-1;
 			}
+			TP[i][0] = -1;
+			TP[i][1] = 0;
 		}
 	}
 	
@@ -135,15 +141,15 @@ public class NRU extends Thread{
 		System.out.println("\n\nFallos encontrados: "+cantidadFallos);
 	}
 
+	public void actualizarBitsRM() {
+		
+	}
+	
 	public void run() {
 		if(thread) {
-			nru();
-			for(int i=0; i<cantidadFrames; i++) {
-				
-			}
-			
+			nru();			
 		}else {
-			
+			actualizarBitsRM();
 		}
 	}
 }
