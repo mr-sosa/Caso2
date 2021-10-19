@@ -129,18 +129,21 @@ public class NRU extends Thread{
 		matriz=new int [cantidadFrames][cantidadPaginas];
 		fallos= new int [cantidadPaginas];
 		casoFrames= new int[cantidadFrames];
+		TP = new int [cantidadFrames][2];
 		iniciarxfallos();
 		iniciarMatriz();
 		//Recorremos todas las paginas
 		try {
 			for(int j=0;j<cantidadPaginas;j++){
+				if(j%(cantidadFrames/2) == 0) {
+					Thread.yield();
+				}
 				if(!buscar(j)){
 					modificar(j);
 				} else {
 					modificarBit(j);
 				}
 				Thread.sleep(1);
-				notifyAll();
 			}
 		}catch(Exception e) {
 			
