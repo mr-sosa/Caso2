@@ -141,8 +141,33 @@ public class NRU extends Thread{
 		System.out.println("\n\nFallos encontrados: "+cantidadFallos);
 	}
 
-	public void actualizarBitsRM() {
-		
+	private void semaforoWait() {
+		try {
+			wait();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void semaforoNotify() {
+		notifyAll();
+	}
+	
+	public synchronized void actualizarBitsRM() {
+		try {
+			boolean x = true;
+			while(x) {
+				semaforoWait();
+				for(int i=0; i<cantidadFrames;i++) {
+					TP[i][1]=0;
+				}
+				Thread.sleep(20);
+				semaforoNotify();
+			}
+				
+		}catch(Exception e) {
+		}
 	}
 	
 	public void run() {
