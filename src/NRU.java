@@ -158,12 +158,16 @@ public class NRU extends Thread{
 		try {
 			boolean x = true;
 			while(x) {
-				semaforoWait();
+				wait();
 				for(int i=0; i<cantidadFrames;i++) {
-					TP[i][1]=0;
+					if(TP[i][1] == 3 || TP[i][1] == 1) {
+						TP[i][1] = 1;
+					} else {
+						TP[i][1]=0;
+					}
 				}
 				Thread.sleep(20);
-				semaforoNotify();
+				notifyAll();
 			}
 				
 		}catch(Exception e) {
